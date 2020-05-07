@@ -60,6 +60,7 @@ class ServerConfigurationStructureService
         }
 
         return [
+            'name' => $server->name,									
             'uuid' => $server->uuid,
             'build' => [
                 'default' => [

@@ -9,9 +9,17 @@ use Pterodactyl\Traits\Controllers\JavascriptInjection;
 use Pterodactyl\Contracts\Repository\ServerRepositoryInterface;
 use Pterodactyl\Http\Requests\Server\Settings\ChangeServerNameRequest;
 
+use GuzzleHttp\Exception\RequestException;
+use Pterodactyl\Contracts\Repository\Daemon\ServerRepositoryInterface as DaemonRepositoryInterface;
+
 class NameController extends Controller
 {
     use JavascriptInjection;
+
+    /**
+     * @var \Pterodactyl\Contracts\Repository\Daemon\ServerRepositoryInterface
+     */
+    private $daemonRepository;
 
     /**
      * @var \Pterodactyl\Contracts\Repository\ServerRepositoryInterface
@@ -20,12 +28,13 @@ class NameController extends Controller
 
     /**
      * NameController constructor.
-     *
-     * @param \Pterodactyl\Contracts\Repository\ServerRepositoryInterface $repository
+     * @param \Pterodactyl\Contracts\Repository\ServerRepositoryInterface        $repository
+     * @param \Pterodactyl\Contracts\Repository\Daemon\ServerRepositoryInterface $daemonRepository
      */
-    public function __construct(ServerRepositoryInterface $repository)
+    public function __construct(ServerRepositoryInterface $repository, DaemonRepositoryInterface $daemonRepository)
     {
         $this->repository = $repository;
+        $this->daemonRepository = $daemonRepository;
     }
 
     /**
@@ -52,7 +61,17 @@ class NameController extends Controller
      */
     public function update(ChangeServerNameRequest $request): RedirectResponse
     {
-        $this->repository->update($request->getServer()->id, $request->validated());
+        $name = $request->validated();
+        $this->repository->update($request->getServer()->id, $name);
+
+        // Update on the daemon.
+        try {
+            $this->daemonRepository->setServer($request->getServer())->update([
+                'name' => $name['name'],
+            ]);
+        } catch (RequestException $exception) {
+            throw new DaemonConnectionException($exception);
+        }
 
         return redirect()->route('server.settings.name', $request->getServer()->uuidShort);
     }

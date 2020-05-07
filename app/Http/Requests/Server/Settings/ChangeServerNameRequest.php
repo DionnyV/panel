@@ -14,7 +14,7 @@ class ChangeServerNameRequest extends ServerFormRequest
      */
     protected function permission(): string
     {
-        return 'edit-name';
+        return 'view-name';
     }
 
     /**

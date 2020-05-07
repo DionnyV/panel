@@ -256,6 +256,10 @@ return [
                 'title' => 'Create Database',
                 'description' => 'Allows a user to create additional databases for this server.',
             ],
+			'view_name' => [
+                'title' => 'Change Server Name',
+                'description' => 'Allows a user to modify the name to identify the server.',
+            ],
         ],
     ],
     'allocations' => [
