@@ -9,24 +9,25 @@
 
 return [
     'notices' => [
-        'service_created' => 'Un nuevo nido, a :name, ha sido creado con éxito.',
-        'service_deleted' => 'Se ha eliminado correctamente el nido solicitado del panel.',
-        'service_updated' => 'Se actualizaron correctamente las opciones de configuración del nido.',
-        'functions_updated' => 'Se ha actualizado el archivo de funciones de nido. Tendrá que reiniciar los nodos para que estos cambios se apliquen.',
+        'created' => 'Un nuevo nido, :name, ha sido creado con éxito.',
+        'deleted' => 'Se eliminó con éxito el nido solicitado del Panel.',
+        'updated' => 'Se actualizó con éxito las opciones de configuración del nido.',
     ],
-    'options' => [
+    'eggs' => [
         'notices' => [
-            'option_deleted' => 'Se ha eliminado correctamente la opción del huevo solicitada del Panel.',
-            'option_updated' => 'Opción del huevo se ha actualizado correctamente.',
-            'script_updated' => 'Opción del huevo de script de instalación se ha actualizado y se ejecutará cuando se instalan servidores.',
-            'option_created' => 'Nueva opción del huevo se ha creado correctamente. Es necesario reiniciar los demonios ejecutándose para aplicar este nuevo huevo.',
+            'imported' => 'Importado con éxito este Huevo y sus variables asociadas.',
+            'updated_via_import' => 'Este Huevo ha sido actualizado utilizando el archivo proporcionado.',
+            'deleted' => 'Se eliminó con éxito el Huevo solicitado del Panel.',
+            'updated' => 'Se actualizó con éxito las opciones de configuración del Huevo.',
+            'script_updated' => 'El script de instalación del Huevo se ha actualizado y se ejecutará siempre que se instalen servidores.',
+            'egg_created' => 'Se puso un nuevo huevo con éxito. Tendrá que reiniciar los daemons en ejecución para aplicar este nuevo huevo.',
         ],
     ],
     'variables' => [
         'notices' => [
-            'variable_deleted' => 'La variable ":variable" se ha eliminado y ya no estará disponible para los servidores una vez reconstruida.',
-            'variable_updated' => 'Se ha actualizado la variable ":variable". Es necesario reconstruir los servidores que utilizan esta variable con el fin de aplicar los cambios.',
-            'variable_created' => 'Nueva variable de éxito ha sido creado y asignado a esta opción del huevo.',
+            'variable_deleted' => 'La variable ":variable" se ha eliminado y ya no estará disponible para los servidores una vez reconstruido.',
+            'variable_updated' => 'La variable ":variable" ha sido actualizada. Deberá reconstruir los servidores que utilicen esta variable para aplicar los cambios.',
+            'variable_created' => 'Nueva variable se ha creado y asignado correctamente a este huevo.',
         ],
     ],
 ];
